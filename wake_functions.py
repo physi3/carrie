@@ -10,9 +10,23 @@ def key_word(command_string, key_words, ordered=False):
     key_words_found = 0
     ordered_index = 0
     for i in command_string.split(" "):
-        unordered_check = not(ordered) and i.lower() in map(lambda x: x.lower(),key_words)
-        ordered_check = ordered and i.lower() in map(lambda x: x.lower(),key_words[ordered_index:])
-        if unordered_check or ordered_check:
+        search_words = [key_words,key_words[ordered_index:]][ordered]
+        if i.lower() in map(lambda x: x.lower(),search_words):
             key_words_found += 1
             ordered_index = i
     return key_words_found/len(key_words)
+
+def multi_key_word(command_string, key_words):
+    """
+    A wake function that searches for key words.
+    Multiple keywords can be in place of one position.
+    Returns chance of waking
+    """
+    key_words_copy = key_words.copy()
+    for i in command_string.split(" "):
+        for j in key_words_copy:
+            if_list_contin = isinstance(j, list) and i.lower() in map(lambda x: x.lower(),j)
+            if_string_contin = isinstance(j, str) and j.lower() == i.lower()
+            if if_list_contin or if_string_contin:
+                key_words_copy.remove(j)
+    return (len(key_words)-len(key_words_copy))/len(key_words)

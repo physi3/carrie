@@ -30,4 +30,15 @@ class Command:
         Check all a command's wake functions for its highest probabilty
         """
         return max(map(lambda x: x(command_string), self.wake_functions))
-        
+
+def out(string):
+    """
+    Carrie output (TAS)
+    """
+    print(string)
+
+def wait_for_in():
+    """
+    Get's input from Carrie
+    """
+    return input("[>>")
