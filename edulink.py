@@ -29,7 +29,7 @@ def get_next_lesson_string():
     humanized_next_lesson = humanize_event(list(get_timeline().start_after(arrow.now()))[0])
     return "Your next lesson is {}".format(humanized_next_lesson)
 
-edulink.add_command(plugins.Command(wake_func, lambda: plugins.out(get_next_lesson_string())))
+edulink.add_command(plugins.Command(wake_func, lambda: edulink.out(get_next_lesson_string())))
 
 #Today Lessons Command
 wake_func = [lambda x: wf.multi_key_word(x, [["what","what's"],"lessons",["today","today's"]])]
@@ -38,10 +38,10 @@ def todays_lessons_string():
     lessons = hr.list_foramtting(list(map(lambda x: x.name,list(get_timeline().today()))))
     return "Your lessons today are: "+lessons+"."
 
-edulink.add_command(plugins.Command(wake_func, lambda: plugins.out(todays_lessons_string())))
+edulink.add_command(plugins.Command(wake_func, lambda: edulink.out(todays_lessons_string())))
 
-while True:
-    IN = input("[>> ")
-    if edulink.find_highest_probablity(IN):
-        print(edulink.find_highest_probablity(IN)+100)
-        edulink.mosts_likely_command(IN).call_function()
+if __name__ == '__main__':
+    while True:
+        IN = input("[>> ")
+        if edulink.find_highest_probablity(IN):
+            edulink.mosts_likely_command(IN).call_function()

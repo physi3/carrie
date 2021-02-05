@@ -9,6 +9,7 @@ class Plugin:
 
     def __init__(self):
         self.commands = []
+        self.carrie = None
 
     def add_command(self, command):
         """
@@ -30,6 +31,21 @@ class Plugin:
         working_funcs.sort(key = lambda x: x.check_wake(command_string))
         return working_funcs[-1]
 
+    def out(self, string):
+        """
+        Carrie output (TAS)
+        """
+        if self.carrie is None:
+            print(string)
+        else:
+            self.carrie.out(string)
+
+    def wait_for_in(self):
+        """
+        Get's input from Carrie
+        """
+        return input("[>>")
+
 class Command:
     """
     A command for a CarrieAIAssistant plugin module
@@ -44,15 +60,3 @@ class Command:
         Check all a command's wake functions for its highest probabilty
         """
         return max(map(lambda x: x(command_string), self.wake_functions))
-
-def out(string):
-    """
-    Carrie output (TAS)
-    """
-    print(string)
-
-def wait_for_in():
-    """
-    Get's input from Carrie
-    """
-    return input("[>>")
