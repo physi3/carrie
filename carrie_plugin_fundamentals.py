@@ -11,6 +11,10 @@ class Plugin:
         self.commands = []
         self.carrie = None
 
+    def add_carrie(self,carrie):
+        "Adds Carrie object to a Plugin for two way relationship"
+        self.carrie = carrie
+
     def add_command(self, command):
         """
         Add a command to a CarrieAIAssistant plugin module
@@ -33,7 +37,8 @@ class Plugin:
 
     def out(self, string):
         """
-        Carrie output (TAS)
+        Outputs string
+        Through Carrie if availiable
         """
         if self.carrie is None:
             print(string)

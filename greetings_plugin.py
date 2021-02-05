@@ -20,6 +20,7 @@ greetings.add_command(helloCommand)
 
 #Test
 if __name__ == '__main__':
-    IN = input()
-    if greetings.find_highest_probablity(IN):
-        greetings.mosts_likely_command(IN).call_function()
+    while True:
+        IN = input("[>> ")
+        if greetings.find_highest_probablity(IN):
+            greetings.most_likely_command(IN).call_function()
