@@ -23,7 +23,7 @@ class Plugin:
         """
         return max(map(lambda x: x.check_wake(command_string), self.commands))
 
-    def mosts_likely_command(self, command_string):
+    def most_likely_command(self, command_string):
         """
         Returns the command with the highest probablility of waking
         """

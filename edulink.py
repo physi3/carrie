@@ -44,4 +44,4 @@ if __name__ == '__main__':
     while True:
         IN = input("[>> ")
         if edulink.find_highest_probablity(IN):
-            edulink.mosts_likely_command(IN).call_function()
+            edulink.most_likely_command(IN).call_function()
