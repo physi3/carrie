@@ -49,7 +49,19 @@ class Plugin:
         """
         Get's input from Carrie
         """
-        return input("[>>")
+        if self.carrie is None:
+            return input("[>> ")
+        else:
+            self.carrie.inp()
+
+    def play_media(self, media, media_name="media"):
+        """
+        Attempts to play media through vlc
+        """
+        self.out("Playing "+media_name)
+        if self.carrie is not None:
+            self.carrie.vlc_player.set_media(media)
+            self.carrie.vlc_player.play()
 
 class Command:
     """
