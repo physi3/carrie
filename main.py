@@ -1,5 +1,6 @@
 "Main"
 import vlc
+import speech_recognition as sr
 
 import greetings_plugin
 import edulink
@@ -8,8 +9,12 @@ import yt_music_plugin
 class Carrie:
     "Carrie Object"
     def __init__(self):
+        self.mic = sr.Microphone()
+        self.speech_recogniser = sr.Recognizer()
+
         self.plugins = []
-        self.vlc_player = vlc.Instance().media_player_new() #VLC
+
+        self.vlc_player = vlc.Instance().media_player_new()
 
     def load_plugin(self, plugin):
         "Loads a plugin into carrie"
@@ -17,12 +22,17 @@ class Carrie:
         self.plugins.append(plugin)
 
     def inp(self):
-        "Gets input (via SR eventually)"
-        return input("[>> ")
+        "Gets input"
+        input("Press enter to continue..")
+        with self.mic as source:
+            audio = self.speech_recogniser.listen(source)
+            recognized_string = self.speech_recogniser.recognize_google(audio)
+            print("I heard "+recognized_string)
+            return recognized_string
 
     def out(self, string):
         "Outputs string (via TTS eventually)"
-        print("CarrieOut")
+        print("\nCarrieOut")
         print(string)
 
     def run_most_likely_command(self, command_string):

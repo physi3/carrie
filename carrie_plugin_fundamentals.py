@@ -52,7 +52,7 @@ class Plugin:
         if self.carrie is None:
             return input("[>> ")
         else:
-            self.carrie.inp()
+            return self.carrie.inp()
 
     def play_media(self, media, media_name="media"):
         """

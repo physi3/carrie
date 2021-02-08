@@ -1,3 +1,7 @@
+"""
+Music plugin (via youtube) for Carrie
+"""
+
 import pafy
 import vlc
 from youtubesearchpython import VideosSearch
