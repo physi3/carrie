@@ -23,7 +23,6 @@ class Carrie:
 
     def inp(self):
         "Gets input"
-        input("Press enter to continue..")
         with self.mic as source:
             audio = self.speech_recogniser.listen(source)
             recognized_string = self.speech_recogniser.recognize_google(audio)
@@ -51,4 +50,5 @@ carrie.load_plugin(yt_music_plugin.youtube_music_plugin)
 
 
 while True:
+    input("Press enter to continue..")
     carrie.run_most_likely_command(carrie.inp())
