@@ -37,7 +37,7 @@ class Carrie:
 
     def run_most_likely_command(self, command_string):
         """
-        Returns the plugin with the highest probablility of waking
+        Runs command with highest likelyhood of waking from all plugins
         """
         working_plugins = self.plugins.copy()
         working_plugins.sort(key = lambda x: x.find_highest_probablity(command_string))
