@@ -137,5 +137,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# edulink
+# API keys
 .edulinkurl
+.weatherapi_key
