@@ -1,6 +1,10 @@
 "Main"
+import os
+
 import vlc
 import speech_recognition as sr
+from gtts import gTTS
+from playsound import playsound
 
 import greetings_plugin
 import edulink
@@ -33,6 +37,11 @@ class Carrie:
         "Outputs string (via TTS eventually)"
         print("\nCarrieOut")
         print(string)
+
+        tts = gTTS(string, lang='en')
+        tts.save("temp.mp3")
+        playsound("temp.mp3")
+        os.remove("temp.mp3")
 
     def run_most_likely_command(self, command_string):
         """
