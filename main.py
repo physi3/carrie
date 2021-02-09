@@ -6,6 +6,8 @@ import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
 
+from porcupine import Porcupine
+
 import greetings_plugin
 import edulink
 import yt_music_plugin
@@ -57,7 +59,5 @@ carrie.load_plugin(greetings_plugin.greetings)
 carrie.load_plugin(edulink.edulink)
 carrie.load_plugin(yt_music_plugin.youtube_music_plugin)
 
-
-while True:
-    input("Press enter to continue..")
-    carrie.run_most_likely_command(carrie.inp())
+carrie_porcupine = Porcupine("blueberry", 0.5, lambda: carrie.run_most_likely_command(carrie.inp()))
+carrie_porcupine.run()
