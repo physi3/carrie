@@ -12,6 +12,7 @@ import greetings_plugin
 import edulink
 import yt_music_plugin
 import open_weather_plugin
+import media_control_plugin
 
 class Carrie:
     "Carrie Object"
@@ -31,6 +32,7 @@ class Carrie:
     def inp(self):
         "Gets input"
         temp_media_volume = self.vlc_player.audio_get_volume()
+        print("Listening..\n")
         self.vlc_player.audio_set_volume(int(temp_media_volume*0.55))
         with self.mic as source:
             audio = self.speech_recogniser.listen(source)
@@ -66,6 +68,7 @@ carrie.load_plugin(greetings_plugin.greetings)
 carrie.load_plugin(edulink.edulink)
 carrie.load_plugin(yt_music_plugin.youtube_music_plugin)
 carrie.load_plugin(open_weather_plugin.weather_plugin)
+carrie.load_plugin(media_control_plugin.media_control)
 
 carrie_porcupine = Porcupine("blueberry", 0.5, lambda: carrie.run_most_likely_command(carrie.inp()))
 carrie_porcupine.run()
