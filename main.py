@@ -29,14 +29,19 @@ class Carrie:
 
     def inp(self):
         "Gets input"
+        temp_media_volume = self.vlc_player.audio_get_volume()
+        self.vlc_player.audio_set_volume(int(temp_media_volume*0.55))
         with self.mic as source:
             audio = self.speech_recogniser.listen(source)
             recognized_string = self.speech_recogniser.recognize_google(audio)
             print("I heard "+recognized_string)
+            self.vlc_player.audio_set_volume(temp_media_volume)
             return recognized_string
 
     def out(self, string):
         "Outputs string (via TTS eventually)"
+        temp_media_volume = self.vlc_player.audio_get_volume()
+        self.vlc_player.audio_set_volume(int(temp_media_volume*0.55))
         print("\nCarrieOut")
         print(string)
 
@@ -44,6 +49,7 @@ class Carrie:
         tts.save("temp.mp3")
         playsound("temp.mp3")
         os.remove("temp.mp3")
+        self.vlc_player.audio_set_volume(temp_media_volume)
 
     def run_most_likely_command(self, command_string):
         """
